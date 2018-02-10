@@ -49,6 +49,7 @@
 <body>
 <div class="main-laporan">
 	@foreach($laporan as $desa => $des)
+	<?php $subtotalArray = [0]; ?>
 	@foreach($des as $kecamatan => $kec)
 	<h3>
 		RENCANA KERJA PEMERINTAH DESA<br>
@@ -144,7 +145,6 @@
 				<td rowspan="<?php echo $rowspan ?>">{{ $bidang }}</td>
 			</tr>
 			<?php $subtotal = 0; ?>
-			<?php $total = 0; ?>
 			@foreach($value as $data => $value)
 			<?php $subtotal += $value['biaya']; ?>
 			<tr>
@@ -162,11 +162,10 @@
 				<td><?php echo date('m/Y', strtotime('2018-12-01')); ?></td>
 				<td><?php echo $value['pelaksana']; ?></td>
 			</tr>
-			<?php $total += $subtotal; ?>
 			@endforeach
 			<tr>
 				<td align="center" colspan="6">JUMLAH PER BIDANG</td>
-				<td>{{ $subtotal }}</td>
+				<td>{{ $subtotalArray[] = $subtotal }}</td>
 				<td></td>
 				<td></td>
 				<td></td>
@@ -180,7 +179,7 @@
 			@endforeach
 			<tr>
 				<td align="center" colspan="6">JUMLAH TOTAL</td>
-				<td>{{ $total }}</td>
+				<td>{{ array_sum($subtotalArray) }}</td>
 				<td></td>
 				<td></td>
 				<td></td>
