@@ -49,8 +49,8 @@
 <body>
 <div class="main-laporan">
 	@foreach($laporan as $desa => $des)
-	<?php $subtotalArray = [0]; ?>
 	@foreach($des as $kecamatan => $kec)
+	<?php $subtotalArray = [0]; ?>
 	<h3>
 		RENCANA KERJA PEMERINTAH DESA<br>
 		TAHUN 2018
