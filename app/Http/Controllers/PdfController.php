@@ -13,7 +13,24 @@ class PdfController extends Controller
 	public function generatePdf()
 	{
 		$data = $this->decodeApi(config('laporan.api.satu'));
-		$dataDecode = json_decode($data, true);
+		$laporan = $this->selectVilage($data);
+//		$pdf = PDF::loadView('pdf.pdf', compact('laporan'));
+//		header("Content-type:application/json");
+//		print json_encode($laporan,  JSON_PRETTY_PRINT);
+//		dd($laporan);
+//		return $pdf->stream('pdf.pdf');
+		return view('pdf.pdf',compact('laporan'));
+		
+	}
+
+	private function decodeApi($value)
+	{
+		return file_get_contents(base64_decode($value));
+	}
+	
+	private function selectVilage($value)
+	{
+		$dataDecode = json_decode($value, true);
 		$dataApi = array();
 		foreach($dataDecode as $key => $val) {
 			$key1 = $val['nama_kecamatan'];
@@ -23,16 +40,7 @@ class PdfController extends Controller
 			unset($val['nama_kecamatan'], $val['nama_desa'],$val['kd_bid'], $val['nama_bidang']);
 			$dataApi[$key1][$key2][$key3][$key4][] = $val;
 		}
-		$laporan = $dataApi;
-//		header("Content-type:application/json");
-//		print json_encode($laporan,  JSON_PRETTY_PRINT);
-//		dd($laporan);
-		return view('pdf.pdf',compact('laporan'));
-		
+		return $laporan = $dataApi;
 	}
 
-	private function decodeApi($value)
-	{
-		return file_get_contents(base64_decode($value));
-	}
 }
