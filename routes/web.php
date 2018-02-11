@@ -16,8 +16,9 @@ Route::get('/', function() {
 });
 
 Route::get('portal/rkp', 'RenjaController@index')->name('renja.index');
-Route::get('/rkp', 'PdfController@reportRKP')->name('rkp');
-Route::get('/rpj', 'PdfController@reportRPJ')->name('rpj');
+Route::get('portal/rpj', 'RpjController@index')->name('rpj.index');
+Route::post('/rkp', 'PdfController@reportRKP')->name('renja.search');
+Route::post('/rpj', 'PdfController@reportRPJ')->name('rpj.search');
 Route::get('/rpbd', 'PdfController@reportAPBD')->name('rpbd');
 Auth::routes();
 

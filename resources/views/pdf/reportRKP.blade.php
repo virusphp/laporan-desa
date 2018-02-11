@@ -171,7 +171,7 @@
 			<?php endforeach; ?>
 			<tr>
 				<td align="center" colspan="6">JUMLAH PER BIDANG</td>
-				<td><?php $subtotalArray[] = $subtotal; ?></td>
+				<td><?php echo $subtotalArray[] = $subtotal; ?></td>
 				<td></td>
 				<td></td>
 				<td></td>
@@ -185,7 +185,7 @@
 			<?php endforeach; ?>
 			<tr>
 				<td align="center" colspan="6">JUMLAH TOTAL</td>
-				<td><?php array_sum($subtotalArray); ?></td>
+				<td><?php echo array_sum($subtotalArray); ?></td>
 				<td></td>
 				<td></td>
 				<td></td>

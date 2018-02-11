@@ -4,15 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use PDF;
+use App\Renja;
+use App\RPJ;
+use App\RPBD;
+use DB;
 
 class PdfController extends Controller
 {
     //
 
 	// Generate PDF
-	public function reportRKP()
+	public function reportRKP(Request $request)
 	{
-		$data = $this->decodeApi(config('laporan.api.satu'));
+//		$data = Renja::select("*")->get();
+		$data = DB::table('smas_rkpdes')->where('kd_desa',$request->desa)->get();
+//		$data = $this->decodeApi(config('laporan.api.satu'));
 		$laporan = $this->selectRKP($data);
 //		$pdf = PDF::loadView('pdf.pdf', compact('laporan'))->setPaper('letter', 'landscape');
 //		header("Content-type:application/json");
@@ -24,9 +30,9 @@ class PdfController extends Controller
 		
 	}
 
-	public function reportRPJ()
+	public function reportRPJ(Request $request)
 	{
-		$data = $this->decodeApi(config('laporan.api.dua'));
+		$data = DB::table('smas_rpjmdes')->where('kd_desa',$request->desa)->get();
 		$laporan = $this->selectRPJ($data);
 //		$pdf = PDF::loadView('pdf.pdf', compact('laporan'))->setPaper('letter', 'landscape');
 //		header("Content-type:application/json");
@@ -40,7 +46,8 @@ class PdfController extends Controller
 
 	public function reportAPBD()
 	{
-		$data = $this->decodeApi(config('laporan.api.tiga'));
+		$data = DB::table('smas_apbdes')->where('tahun', 2018)->get();
+//		$data = $this->decodeApi(config('laporan.api.tiga'));
 		$laporan = $this->selectAPBD($data);
 //		$pdf = PDF::loadView('pdf.pdf', compact('laporan'))->setPaper('letter', 'landscape');
 		header("Content-type:application/json");

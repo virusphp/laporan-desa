@@ -28,7 +28,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li><a class="nav-link" href="{{ route('renja.index') }}">Rencana Kerja</a></li>
-                        <li><a class="nav-link" href="{{ route('rpj') }}">Rencana RPJ</a></li>
+                        <li><a class="nav-link" href="{{ route('rpj.index') }}">Rencana RPJ</a></li>
                         <li><a class="nav-link" href="{{ route('rpbd') }}">Anggaran Pendapatan</a></li>
                     </ul>
 
