@@ -29,7 +29,12 @@
                     <ul class="navbar-nav mr-auto">
                         <li><a class="nav-link" href="{{ route('renja.index') }}">Rencana Kerja</a></li>
                         <li><a class="nav-link" href="{{ route('rpj.index') }}">Rencana RPJ</a></li>
-                        <li><a class="nav-link" href="{{ route('rpbd') }}">Anggaran Pendapatan</a></li>
+						<li><a class="nav-link" href="{{ route('rpbd') }}">Anggaran Pendapatan</a></li>
+					{{--
+						<li><a class="nav-link" href="{{ route('api.renja') }}">API Renja</a></li>
+						<li><a class="nav-link" href="{{ route('api.rpj') }}">API RKP</a></li> 
+					--}}
+
                     </ul>
 
                 </div>
@@ -43,5 +48,6 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+	@stack('scripts')
 </body>
 </html>

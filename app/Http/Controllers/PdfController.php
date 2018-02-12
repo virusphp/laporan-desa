@@ -17,14 +17,16 @@ class PdfController extends Controller
 	public function reportRKP(Request $request)
 	{
 //		$data = Renja::select("*")->get();
-		$data = DB::table('smas_rkpdes')->where('kd_desa',$request->desa)->get();
+		$data = DB::table('smas_rkpdes')->where(function($query) use ($request) {
+			$query->where('kd_kec',$request->kd_kec)
+				->where('kd_desa',$request->kd_desa);
+		})->get();
 //		$data = $this->decodeApi(config('laporan.api.satu'));
 		$laporan = $this->selectRKP($data);
-//		$pdf = PDF::loadView('pdf.pdf', compact('laporan'))->setPaper('letter', 'landscape');
+//		$pdf = PDF::loadView('pdf.reportRKP', compact('laporan'))->setPaper('letter', 'landscape');
 //		header("Content-type:application/json");
 //		print json_encode($laporan,  JSON_PRETTY_PRINT);
 //		dd($laporan);
-//		return view('welcome', compact('data'));
 //		return $pdf->stream('laporan.pdf');
 		return view('pdf.reportRKP',compact('laporan'));
 		
@@ -32,7 +34,11 @@ class PdfController extends Controller
 
 	public function reportRPJ(Request $request)
 	{
-		$data = DB::table('smas_rpjmdes')->where('kd_desa',$request->desa)->get();
+		$data = DB::table('smas_rpjmdes')->where(function($query) use ($request) {
+			$query->where('tahun', $request->tahun)
+				->where('kd_kec', $request->kd_kec)
+				->where('kd_desa', $request->kd_desa);
+		})->get();
 		$laporan = $this->selectRPJ($data);
 //		$pdf = PDF::loadView('pdf.pdf', compact('laporan'))->setPaper('letter', 'landscape');
 //		header("Content-type:application/json");

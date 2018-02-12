@@ -23,4 +23,27 @@
         </div>
     </div>
 @endsection
+@push('scripts')
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script type="text/javascript">
+$("select[name='kd_kec']").change(function() {
+  var kd_kec = $(this).val();
+  var token = $("input[name='_token']").val();
+  $.ajax({
+    url : "{{ route('renja.desa') }}",
+    method : "POST",
+    data : {
+		kd_kec : kd_kec,
+		_token : token
+    },
+    success : function(data) {
+		console.log(data.options);	
+   	  	$("select[name='kd_desa']").html('');
+      	$("#desa").html(data.options);
+      //
+    }
+  });
+});
 
+</script>
+@endpush
