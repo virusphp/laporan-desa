@@ -3,16 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Renja;
 use DB;
 
-class RenjaController extends Controller
+class RkppController extends Controller
 {
     //
+	//
 	public function index()
 	{
 		$kecamatan = DB::table('smas_rkpdes')->pluck('nama_kecamatan','kd_kec')->all();
-		return view('renja.index', compact('kecamatan'));
+		return view('rkpp.index', compact('kecamatan'));
 	}	
 
 	public function apiRenja()
@@ -28,5 +28,5 @@ class RenjaController extends Controller
 			return response()->json(['options' => $data]);
 		}	
 	}
-
+	
 }

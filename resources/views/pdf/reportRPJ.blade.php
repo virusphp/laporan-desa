@@ -14,13 +14,27 @@
 			margin-top:10px;
 			margin-left:auto; 
 			margin-right:auto;
-/*			border-collapse: collapse;
- */
+			border-collapse: collapse;
 			font-family: sans-serif;
 			color: #444;
 			border: 1px solid #f2f5f7;
 		}
 
+		table.table-laporan {
+			margin-left:auto; 
+			margin-right:auto;
+			border-collapse: collapse;
+			color: #444;
+			border: 1px solid #000;
+		}
+
+		thead tr th {
+			border: 1px solid #880000;
+		}
+
+		.table-laporan tbody tr td {
+			border: 1px solid #000000;
+		}
 		h3 {
 			font-weight: bold;
 			text-align:center;

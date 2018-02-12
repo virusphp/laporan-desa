@@ -11,6 +11,17 @@
 		}
 
 		table.table-laporan {
+			margin-top:10px;
+			margin-left:auto; 
+			margin-right:auto;
+/*			border-collapse: collapse;
+ */
+			font-family: sans-serif;
+			color: #444;
+			border: 1px solid #f2f5f7;
+		}
+
+		table.table-laporan {
 			margin-left:auto; 
 			margin-right:auto;
 			border-collapse: collapse;
@@ -25,7 +36,6 @@
 		.table-laporan tbody tr td {
 			border: 1px solid #000000;
 		}
-
 		h3 {
 			font-weight: bold;
 			text-align:center;
@@ -36,6 +46,7 @@
 			background: #35A9DB;
 			color: #fff;
 			font-weight: normal;
+			width:40px;
 		}
 
 		.page-break {    
@@ -51,18 +62,18 @@
 		}
 
 		hr {
-			margin-top: 1px;
+			margin-top: 5px;
 		}
 	</style>
 
 </head>
 <body>
-<div class="main-laporan">
+<div class="main-laporan page-break">
 	<?php foreach($laporan as $desa => $des): ?>
 	<?php foreach($des as $kecamatan => $kec): ?>
 	<?php $subtotalArray = [0]; ?>
 	<h3>
-		RENCANA KEGIATAN PEMERINTAH DESA<br>
+		RENCANA KERJA PEMERINTAH DESA<br>
 		TAHUN 2018
 	</h3>
 	<hr>
@@ -88,43 +99,46 @@
 			<td>PROVINSI JAWA TENGAH</td>
 		</tr>
 	</table>
-	<table class="table-laporan">
+	<table width="100%" class="table-laporan" border="1">
 		<thead>
 			<tr>
 				<th rowspan="2">NO</th>
 				<th colspan="2">JENIS BIDANG</th>
 				<th rowspan="2">
 					LOKASI
+					(RT/RW
+					DUSUN)
 				</th>
 				<th rowspan="2">
-					VOLUME
+					PERKIRAAN VOLUME
 				</th>
 				<th rowspan="2">
-					SATUAN	
+					SASARAN / MANFAAT	
 				</th>
 				<th rowspan="2">
-					BIAYA (RUPIAH)
-				</th>
-				<th colspan="4">
-					SASARAN
-				</th>
-				<th colspan="3">
 					WAKTU PELAKSANAAN
 				</th>
+				<th colspan="2">
+					PERKIRAAN BIAYA & SMBER
+				</th>
+				<th colspan="3">
+					POLA PELAKSANAAN
+				</th>
 				<th rowspan="2">
-					PELAKSANA KEGIATAN
+					RENCANA PELAKSANAAN
 				</th>
 			</tr>
 			<tr>
 				<th>BIDANG/SUB BIDANG</th>
 				<th>JENIS KEGIATAN</th>
-				<th>JUMLAH</th>
-				<th>LAKI LAKI</th>
-				<th>PEREMPUAN</th>
-				<th>ARTM</th>
-				<th>DURASI</th>
-				<th>MULAI</th>
-				<th>SELESAI</th>
+				<th>
+					JUMLAH
+					(RUPIAH)
+				</th>
+				<th>SUMBER</th>
+				<th>SWA KELOLA</th>
+				<th>KERJASAMA</th>
+				<th>PIHAK KETIGA</th>
 			</tr>
 			<tr>
 				<th>1</th>
@@ -140,8 +154,6 @@
 				<th>11</th>
 				<th>12</th>
 				<th>13</th>
-				<th>14</th>
-				<th>15</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -158,18 +170,16 @@
 			<?php foreach($value as $data => $value): ?>
 			<?php $subtotal += $value['biaya']; ?>
 			<tr>
-				<td><?php echo $value['nama_kegiatan'];?></td>
+				<td><?php echo $value['nama_kegiatan']; ?></td>
 				<td><?php echo $value['lokasi']; ?></td>
-				<td><?php $volume = explode(" ",$value['Perkiraan_Volum']); echo !is_null($value['Perkiraan_Volum']) ? $volume[0] : 0 ; ?></td>
-				<td><?php $volume = explode(" ",$value['Perkiraan_Volum']); echo !is_null($value['Perkiraan_Volum']) ? $volume[1] : 0 ; ?></td>
-				<td><?php echo $value['biaya']; ?></td>
-				<td><?php echo rand(1,100); ?></td>
-				<td><?php echo rand(1,100); ?></td>
-				<td><?php echo rand(1,100); ?></td>
-				<td><?php echo rand(1,100); ?></td>
+				<td><?php echo $value['Perkiraan_Volum']; ?></td>
+				<td><?php echo $value['sasaran']; ?></td>
 				<td><?php echo $value['waktu']; ?></td>
-				<td><?php echo date('m/Y', strtotime('2018-01-01')); ?></td>
-				<td><?php echo date('m/Y', strtotime('2018-12-01')); ?></td>
+				<td><?php echo $value['biaya']; ?></td>
+				<td><?php echo $value['kd_sumber']; ?></td>
+				<td><?php echo $value['swakelola']; ?></td>
+				<td><?php echo $value['kerjasama']; ?></td>
+				<td><?php echo $value['pihak_ketiga']; ?></td>
 				<td><?php echo $value['pelaksana']; ?></td>
 			</tr>
 			<?php endforeach; ?>
@@ -182,16 +192,12 @@
 				<td></td>
 				<td></td>
 				<td></td>
-				<td></td>
-				<td></td>
 			</tr>	
 			<?php endforeach; ?>
 			<?php endforeach; ?>
 			<tr>
 				<td align="center" colspan="6">JUMLAH TOTAL</td>
 				<td><?php echo array_sum($subtotalArray); ?></td>
-				<td></td>
-				<td></td>
 				<td></td>
 				<td></td>
 				<td></td>

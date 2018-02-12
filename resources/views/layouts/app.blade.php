@@ -27,11 +27,12 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        <li><a class="nav-link" href="{{ route('renja.index') }}">Rencana Kerja</a></li>
+                        <li><a class="nav-link" href="{{ route('rkp.index') }}">Rencana Kegiatan</a></li>
+                        <li><a class="nav-link" href="{{ route('rkpp.index') }}">Rencana Kerja</a></li>
                         <li><a class="nav-link" href="{{ route('rpj.index') }}">Rencana RPJ</a></li>
 						<li><a class="nav-link" href="{{ route('rpbd') }}">Anggaran Pendapatan</a></li>
 					{{--
-						<li><a class="nav-link" href="{{ route('api.renja') }}">API Renja</a></li>
+						<li><a class="nav-link" href="{{ route('api.rkp') }}">API Renja</a></li>
 						<li><a class="nav-link" href="{{ route('api.rpj') }}">API RKP</a></li> 
 					--}}
 

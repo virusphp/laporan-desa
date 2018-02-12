@@ -13,9 +13,9 @@
                         <h2 class="panel-title">Pencarian Laporan</h2>
                     </div>
                     <div class="panel-body">
-						{!! Form::open(['url' => route('renja.search'),
+						{!! Form::open(['url' => route('rkp.search'),
                         	'method' => 'post', 'class'=>'form-horizontal']) !!}
-                            @include('renja._form')
+                            @include('rkp._form')
                         {!! Form::close() !!}
                     </div>
                 </div>
@@ -30,7 +30,7 @@ $("select[name='kd_kec']").change(function() {
   var kd_kec = $(this).val();
   var token = $("input[name='_token']").val();
   $.ajax({
-    url : "{{ route('renja.desa') }}",
+    url : "{{ route('rkp.desa') }}",
     method : "POST",
     data : {
 		kd_kec : kd_kec,
