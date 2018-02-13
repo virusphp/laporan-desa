@@ -7,7 +7,37 @@ use DB;
 
 class ApbdController extends Controller
 {
-   //
+
+	//
+	public function index()
+	{
+		$tahun = DB::table('smas_apbdes')->pluck('tahun','tahun')->all();
+		return view('apbd.index', compact('tahun'));
+	}
+
+	public function getKecamatan(Request $request)
+	{
+		if($request->ajax()) {
+			$kecamatan = DB::table('smas_apbdes')->where('tahun',$request->tahun)->pluck('nama_kecamatan','kd_kec')->all();
+			$data = view('dropdown.ajax-kecamatan',compact('kecamatan'))->render();
+			return response()->json(['options' => $data]);
+		}	
+	}
+	
+	public function getDesa(Request $request)
+	{
+		if($request->ajax()) {
+			$desa = DB::table('smas_apbdes')->where(function($query) use ($request){
+					$query->where('tahun',$request->tahun)
+					->where('kd_kec',$request->kd_kec);
+			})->pluck('nama_desa','kd_desa')->all();
+			$data = view('dropdown.ajax-desa',compact('desa'))->render();
+			return response()->json(['options' => $data]);
+		}	
+	}
+
+
+
  	public function apiAPBD()
 	{
 		$data = DB::table('smas_apbdes')->where('tahun', 2018)->get();

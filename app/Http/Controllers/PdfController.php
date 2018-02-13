@@ -68,9 +68,13 @@ class PdfController extends Controller
 		
 	}
 
-	public function reportAPBD()
+	public function reportAPBD(Request $request)
 	{
-		$data = DB::table('smas_apbdes')->where('tahun', 2018)->get();
+		$data = DB::table('smas_apbdes')->where(function ($query) use ($request) {
+			$query->where('tahun', $request->tahun)
+				->where('kd_kec', $request->kd_kec)
+				->where('kd_desa', $request->kd_desa);
+		})->get();
 //		$data = $this->decodeApi(config('laporan.api.tiga'));
 		$laporan = $this->selectAPBD($data);
 //		$pdf = PDF::loadView('pdf.pdf', compact('laporan'))->setPaper('letter', 'landscape');
