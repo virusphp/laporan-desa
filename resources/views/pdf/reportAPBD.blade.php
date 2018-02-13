@@ -38,6 +38,14 @@
 			page-break-before: avoid;
 		}
 
+		.no-bottom {
+			border-bottom: none;
+		}
+
+		.no-top {
+			border-top: none;
+		}
+
 		.table-laporan tr td {
 			text-align: center;
 		}
@@ -105,33 +113,34 @@
 				<td>769.835.000,00</td>
 			</tr>
 			<tr>
-				<td colspan="2">BELANJA</td>
+				<td class="no-bottom">BELANJA</td>
+				<td class="no-bottom"></td>
 			</tr>
 			<?php foreach($des as $kd => $value): ?>
 			<?php foreach($value as $bidang => $bid): ?>
-			<?php foreach($bid as $data => $value): ?>
 			<tr>
-				<td>
+				<td class="no-top">
 					<br>
 					<?php echo $bidang; ?>
+			<?php foreach($bid as $data => $value): ?>
 					<br>
 					<?php echo $value['nama_jenis']; ?>
 					<br>
 					<?php echo $value['nama_kegiatan']; ?>
-					<br>
+			<?php endforeach; ?>
 				</td>
-				<td>
+				<td class="no-top">
+			<?php foreach($bid as $data => $value): ?>
 					<br>
 					<?php echo $value['anggaran_rinc']; ?>
 					<br>
 					<?php echo $value['JumlahAnggaran']; ?>
-					<br>
+			<?php endforeach; ?>
 				</td>
-				<td style="text-align:center;">
+				<td class="no-top" style="text-align:center;">
 					Sumber DDS
 				</td>
 			</tr>
-			<?php endforeach; ?>
 			<?php endforeach; ?>
 			<?php endforeach; ?>
 			<tr>
