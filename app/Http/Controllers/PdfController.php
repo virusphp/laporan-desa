@@ -83,11 +83,7 @@ class PdfController extends Controller
 		
 	}
 
-	private function decodeApi($value)
-	{
-		return file_get_contents(base64_decode($value));
-	}
-
+	
 	private function selectAPBD($value)
 	{
 		$dataDecode = json_decode($value, true);
@@ -102,7 +98,12 @@ class PdfController extends Controller
 			$dataApi[$key1][$key2][$key3][$key4][$key5][] = $val;
 		}
 //		return $dataDecode;
-		return $laporan = $dataApi;
+		return $dataApi;
+	}
+
+	private function apbdHeader($value)
+	{
+
 	}
 
 	private function selectRKP($value)
@@ -135,4 +136,10 @@ class PdfController extends Controller
 		}
 		return $laporan = $dataApi;
 	}
+	
+	private function decodeApi($value)
+	{
+		return file_get_contents(base64_decode($value));
+	}
+
 }
