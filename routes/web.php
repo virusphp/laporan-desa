@@ -31,6 +31,6 @@ Route::post('/rpj', 'PdfController@reportRPJ')->name('rpj.search');
 Route::get('/rpbd', 'PdfController@reportAPBD')->name('rpbd');
 Auth::routes();
 
-Route::get('/api/v1/rkp', 'RkpController@apiRKP')->name('api.rkp');
-Route::get('/api/v1/rpj', 'RpjController@apiRPJ')->name('api.rpj');
-Route::get('/api/v1/apbd', 'ApbdController@apiAPBD')->name('api.apbd');
+Route::get('/api/v1/rkp', 'RkpController@apiRKP')->name('api.rkp')->middleware('cors');
+Route::get('/api/v1/rpj', 'RpjController@apiRPJ')->name('api.rpj')->middleware('cors');
+Route::get('/api/v1/apbd', 'ApbdController@apiAPBD')->name('api.apbd')->middleware('cors');
