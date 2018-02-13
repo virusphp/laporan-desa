@@ -34,6 +34,7 @@
 					{{--
 						<li><a class="nav-link" href="{{ route('api.rkp') }}">API Renja</a></li>
 						<li><a class="nav-link" href="{{ route('api.rpj') }}">API RKP</a></li> 
+						<li><a class="nav-link" href="{{ route('api.apbd') }}">API APBD</a></li> 
 					--}}
 
                     </ul>

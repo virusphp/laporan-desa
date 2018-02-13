@@ -33,3 +33,4 @@ Auth::routes();
 
 Route::get('/api/v1/rkp', 'RkpController@apiRKP')->name('api.rkp');
 Route::get('/api/v1/rpj', 'RpjController@apiRPJ')->name('api.rpj');
+Route::get('/api/v1/apbd', 'ApbdController@apiAPBD')->name('api.apbd');
