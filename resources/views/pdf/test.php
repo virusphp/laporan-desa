@@ -15,23 +15,24 @@ ob_start();
 	<meta charset="UTF-8">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<title>PDF</title>
-	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	<style>
 		html {
-			/* font-family: sans-serif; */
+			font-family: sans-serif;
 		}
 
-		/* table.table-laporan {
+		table.table-laporan {
 			border-collapse: collapse;
 			color: #444;
 			border: 1px solid #000;
-		} */
+		}
 
 		thead tr th {
-			text-align:center;
+			border: 2px solid #880000;
 
+		}
+
+		.table-laporan tbody tr td {
+			border: 1px solid #000000;
 		}
 
 		h3 {
@@ -46,11 +47,13 @@ ob_start();
 			font-weight: normal;
 		}
 
+		.page-break {
+			page-break-before: avoid;
+		}
 
-		.table-responsive-md tr td {
+		.table-laporan tr td {
 			text-align: center;
 			border-collapse: collapse;
-			font-size: 14px;
 		}
 
 		.lampiran tr td {
@@ -96,31 +99,30 @@ ob_start();
 			<td>PROVINSI JAWA TENGAH</td>
 		</tr>
 	</table>
-<div class="table-responsive-md">
-	<table class="table table-bordered table-dark">
+	<table class="table-laporan">
 		<thead>
 			<tr>
-				<th  scope="col" rowspan="2">NO</th>
-				<th  scope="col" colspan="2">JENIS BIDANG</th>
-				<th  scope="col" rowspan="2">
+				<th rowspan="2">NO</th>
+				<th colspan="2">JENIS BIDANG</th>
+				<th rowspan="2">
 					LOKASI
 				</th>
-				<th  scope="col" rowspan="2">
+				<th rowspan="2">
 					VOLUME
 				</th>
-				<th  scope="col" rowspan="2">
+				<th rowspan="2">
 					SATUAN
 				</th>
-				<th  scope="col" rowspan="2">
+				<th rowspan="2">
 					BIAYA (RUPIAH)
 				</th>
-				<th  scope="col" colspan="4">
+				<th colspan="4">
 					SASARAN
 				</th>
-				<th  scope="col" colspan="3">
+				<th colspan="3">
 					WAKTU PELAKSANAAN
 				</th>
-				<th  scope="col" rowspan="2">
+				<th rowspan="2">
 					PELAKSANA KEGIATAN
 				</th>
 			</tr>
@@ -217,7 +219,6 @@ ob_start();
 </div>
 
 </body>
-</div>
 </html>
 
 <?php

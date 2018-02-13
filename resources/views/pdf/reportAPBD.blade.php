@@ -1,3 +1,13 @@
+<?php
+// Tentukan path yang tepat ke mPDF
+$nama_dokumen='REPORT APBD'; //Beri nama file PDF hasil.
+//define('_MPDF_PATH','MPDF57/'); // Tentukan folder dimana anda menyimpan folder mpdf
+// Arahkan ke file mpdf.php didalam folder mpdf
+$mpdf	=	new mPDF('utf-8', 'F4-L',10.5, 'arial'); // Membuat file mpdf baru
+
+//Memulai proses untuk menyimpan variabel php dan html
+ob_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <?php ini_set('max_execution_time', 300); ?>
@@ -5,20 +15,23 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<title>PDF</title>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	<style>
 		html {
-			font-family: sans-serif;
+			/* font-family: sans-serif; */
 		}
 
-		table.table-laporan {
-			margin-top:10px;
-			margin-left:auto; 
-			margin-right:auto;
-/*			border-collapse: collapse;
- */
-			font-family: sans-serif;
+		/* table.table-laporan {
+			border-collapse: collapse;
 			color: #444;
-			border: 1px solid #f2f5f7;
+			border: 1px solid #000;
+		} */
+
+		thead tr th {
+			text-align:center;
+
 		}
 
 		h3 {
@@ -31,23 +44,22 @@
 			background: #35A9DB;
 			color: #fff;
 			font-weight: normal;
-			width:40px;
 		}
 
-		.page-break {    
-			page-break-before: avoid;
-		}
 
-		.table-laporan tr td {
+		.table-responsive-md tr td {
 			text-align: center;
+			border-collapse: collapse;
+			font-size: 14px;
 		}
 
 		.lampiran tr td {
 			font-size: 12px;
+
 		}
 
 		hr {
-			margin-top: 5px;
+			margin-top: 1px;
 		}
 	</style>
 
@@ -65,8 +77,9 @@
 	<hr>
 	<p>
 		Sumberdata : DDS Dana Desa (Droping APBN)
-	</p>	
-	<table width="100%" class="table-laporan" border="1">
+	</p>
+	<div class="table-responsive-md">
+		<table class="table table-bordered table-dark">
 		<thead>
 			<tr>
 				<th>URAIAN</th>
@@ -84,7 +97,7 @@
 		<tbody>
 			<tr>
 				<td>
-					PENDAPATAN 
+					PENDAPATAN
 					<br>
 					Pendapatan Transfer
 					<br>
@@ -150,6 +163,20 @@
 
 <?php echo "<p align='right'>Batang, ".date('d-m-Y')."<br>KEPALA DESA KEPUH<br><br><br>( Ahmad Mubarok )</p>"; ?>
 </div>
-	
+
 </body>
 </html>
+
+<?php
+
+// $mpdf->setFooter('{PAGENO}');
+//penulisan output selesai, sekarang menutup mpdf dan generate kedalam format pdf
+$html = ob_get_contents(); //Proses untuk mengambil hasil dari OB..
+ob_end_clean();
+//Disini dimulai proses convert UTF-8, kalau ingin ISO-8859-1 cukup dengan mengganti $mpdf->WriteHTML($html);
+
+$mpdf->SetDisplayMode('fullpage');
+$mpdf->WriteHTML(utf8_encode($html));
+$mpdf->Output($nama_dokumen.'-'.$desa.'-'.$tahun.".pdf" ,'I');
+exit;
+?>

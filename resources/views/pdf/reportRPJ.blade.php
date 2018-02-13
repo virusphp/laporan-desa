@@ -12,7 +12,7 @@
 
 		table.table-laporan {
 			margin-top:10px;
-			margin-left:auto; 
+			margin-left:auto;
 			margin-right:auto;
 			border-collapse: collapse;
 			font-family: sans-serif;
@@ -21,7 +21,7 @@
 		}
 
 		table.table-laporan {
-			margin-left:auto; 
+			margin-left:auto;
 			margin-right:auto;
 			border-collapse: collapse;
 			color: #444;
@@ -48,7 +48,7 @@
 			width:40px;
 		}
 
-		.page-break {    
+		.page-break {
 			page-break-before: avoid;
 		}
 
@@ -111,7 +111,7 @@
 					VOLUME
 				</th>
 				<th rowspan="2">
-					SASARAN/MANFAAT	
+					SASARAN/MANFAAT
 				</th>
 				<th colspan="6">
 					WAKTU PELAKSANAAN
@@ -133,7 +133,7 @@
 				<th>TH 5</th>
 				<th>TH 6</th>
 				<th>
-					JUMLAH 
+					JUMLAH
 					(RUPAIAH)
 				</th>
 				<th>SUMBER</th>
@@ -202,7 +202,7 @@
 				<td></td>
 				<td></td>
 				<td></td>
-			</tr>	
+			</tr>
 			<?php endforeach; ?>
 			<tr>
 				<td align="center" colspan="12">JUMLAH TOTAL</td>
@@ -211,7 +211,7 @@
 				<td></td>
 				<td></td>
 				<td></td>
-			</tr>	
+			</tr>
 		</tbody>
 	</table>
 	<?php endforeach; ?>
@@ -220,6 +220,6 @@
 
 <?php echo "<p align='right'>Batang, ".date('d-m-Y')."<br>KEPALA DESA KEPUH<br><br><br>( Ahmad Mubarok )</p>"; ?>
 </div>
-	
+
 </body>
 </html>

@@ -22,14 +22,16 @@ class PdfController extends Controller
 				->where('kd_desa',$request->kd_desa);
 		})->get();
 //		$data = $this->decodeApi(config('laporan.api.satu'));
-		$laporan = $this->selectRKP($data);
-//		$pdf = PDF::loadView('pdf.reportRKP', compact('laporan'))->setPaper('f4', 'landscape');
+			$laporan = $this->selectRKP($data);
+
+//		$pdf = PDF::loadView('pdf.reportRKP', ['smas_rkpdes' => $laporan], compact('laporan'))->setPaper('f4', 'landscape');
+//		$pdf = PDF::loadView('pdf.reportRKP', compact('laporan'))->SetDisplayMode('fullpage');
 //		header("Content-type:application/json");
 //		print json_encode($laporan,  JSON_PRETTY_PRINT);
 //		dd($laporan);
-//		return $pdf->stream('laporan.pdf');
-		return view('pdf.reportRKP',compact('laporan'));
-		
+ 	//	return $pdf->stream('pdf.reportRKP.pdf');
+ 		return view('pdf.reportRKP', compact('laporan'));
+
 	}
 
 	public function reportRKPP(Request $request)
@@ -47,7 +49,7 @@ class PdfController extends Controller
 //		dd($laporan);
 //		return $pdf->stream('laporan.pdf');
 		return view('pdf.reportRKPP',compact('laporan'));
-		
+
 	}
 
 	public function reportRPJ(Request $request)
@@ -65,7 +67,7 @@ class PdfController extends Controller
 //		return view('welcome', compact('data'));
 //		return $pdf->stream('laporan.pdf');
 		return view('pdf.reportRPJ',compact('laporan'));
-		
+
 	}
 
 	public function reportAPBD(Request $request)
@@ -84,10 +86,10 @@ class PdfController extends Controller
 //		return view('welcome', compact('data'));
 //		return $pdf->stream('laporan.pdf');
 		return view('pdf.reportAPBD',compact('laporan'));
-		
+
 	}
 
-	
+
 	private function selectAPBD($value)
 	{
 		$dataDecode = json_decode($value, true);
@@ -124,7 +126,7 @@ class PdfController extends Controller
 		}
 		return $laporan = $dataApi;
 	}
-	
+
 	private function selectRPJ($value)
 	{
 		$dataDecode = json_decode($value, true);
@@ -140,7 +142,7 @@ class PdfController extends Controller
 		}
 		return $laporan = $dataApi;
 	}
-	
+
 	private function decodeApi($value)
 	{
 		return file_get_contents(base64_decode($value));
