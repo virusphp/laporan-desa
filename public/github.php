@@ -1,2 +1,2 @@
 <?php 
-shell_exec("cd ../ && git pull origin master");
+shell_exec("cd ../ && git pull origin master &");
