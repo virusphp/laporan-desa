@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php ini_set('max_execution_time', 300); ?>
 <head>
 	<meta charset="UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<title>PDF</title>
 	<style>
 		html {
@@ -19,6 +21,21 @@
 			border: 1px solid #f2f5f7;
 		}
 
+		table.table-laporan {
+			margin-left:auto; 
+			margin-right:auto;
+			border-collapse: collapse;
+			color: #444;
+			border: 1px solid #000;
+		}
+
+		thead tr th {
+			border: 1px solid #880000;
+		}
+
+		.table-laporan tbody tr td {
+			border: 1px solid #000000;
+		}
 		h3 {
 			font-weight: bold;
 			text-align:center;
@@ -31,7 +48,11 @@
 			font-weight: normal;
 			width:40px;
 		}
-		
+
+		.page-break {    
+			page-break-before: avoid;
+		}
+
 		.table-laporan tr td {
 			text-align: center;
 		}
@@ -47,9 +68,9 @@
 
 </head>
 <body>
-<div class="main-laporan">
-	@foreach($laporan as $desa => $des)
-	@foreach($des as $kecamatan => $kec)
+<div class="main-laporan page-break">
+	<?php foreach($laporan as $desa => $des): ?>
+	<?php foreach($des as $kecamatan => $kec): ?>
 	<?php $subtotalArray = [0]; ?>
 	<h3>
 		RENCANA KERJA PEMERINTAH DESA<br>
@@ -85,36 +106,39 @@
 				<th colspan="2">JENIS BIDANG</th>
 				<th rowspan="2">
 					LOKASI
+					(RT/RW
+					DUSUN)
 				</th>
 				<th rowspan="2">
-					VOLUME
+					PERKIRAAN VOLUME
 				</th>
 				<th rowspan="2">
-					SATUAN	
+					SASARAN / MANFAAT	
 				</th>
 				<th rowspan="2">
-					BIAYA (RUPIAH)
-				</th>
-				<th colspan="4">
-					SASARAN
-				</th>
-				<th colspan="3">
 					WAKTU PELAKSANAAN
 				</th>
+				<th colspan="2">
+					PERKIRAAN BIAYA & SMBER
+				</th>
+				<th colspan="3">
+					POLA PELAKSANAAN
+				</th>
 				<th rowspan="2">
-					PELAKSANA KEGIATAN
+					RENCANA PELAKSANAAN
 				</th>
 			</tr>
 			<tr>
 				<th>BIDANG/SUB BIDANG</th>
 				<th>JENIS KEGIATAN</th>
-				<th>JUMLAH</th>
-				<th>LAKI LAKI</th>
-				<th>PEREMPUAN</th>
-				<th>ARTM</th>
-				<th>DURASI</th>
-				<th>MULAI</th>
-				<th>SELESAI</th>
+				<th>
+					JUMLAH
+					(RUPIAH)
+				</th>
+				<th>SUMBER</th>
+				<th>SWA KELOLA</th>
+				<th>KERJASAMA</th>
+				<th>PIHAK KETIGA</th>
 			</tr>
 			<tr>
 				<th>1</th>
@@ -130,13 +154,11 @@
 				<th>11</th>
 				<th>12</th>
 				<th>13</th>
-				<th>14</th>
-				<th>15</th>
 			</tr>
 		</thead>
 		<tbody>
-		@foreach($kec as $key => $value)
-			@foreach($value as $bidang => $value)
+		<?php foreach($kec as $key => $value): ?>
+		<?php foreach($value as $bidang => $value): ?>
 			<?php $rowspan = count($value) + 1; ?>
 			<tr>
 				<!-- Dummy Sample Laporan -->
@@ -145,29 +167,25 @@
 				<td rowspan="<?php echo $rowspan ?>">{{ $bidang }}</td>
 			</tr>
 			<?php $subtotal = 0; ?>
-			@foreach($value as $data => $value)
+			<?php foreach($value as $data => $value): ?>
 			<?php $subtotal += $value['biaya']; ?>
 			<tr>
 				<td><?php echo $value['nama_kegiatan']; ?></td>
 				<td><?php echo $value['lokasi']; ?></td>
-				<td><?php $volume = explode(" ",$value['Perkiraan_Volum']); echo !is_null($value['Perkiraan_Volum']) ? $volume[0] : 0 ; ?></td>
-				<td><?php $volume = explode(" ",$value['Perkiraan_Volum']); echo !is_null($value['Perkiraan_Volum']) ? $volume[1] : 0 ; ?></td>
-				<td><?php echo $value['biaya']; ?></td>
-				<td><?php echo rand(1,100); ?></td>
-				<td><?php echo rand(1,100); ?></td>
-				<td><?php echo rand(1,100); ?></td>
-				<td><?php echo rand(1,100); ?></td>
+				<td><?php echo $value['Perkiraan_Volum']; ?></td>
+				<td><?php echo $value['sasaran']; ?></td>
 				<td><?php echo $value['waktu']; ?></td>
-				<td><?php echo date('m/Y', strtotime('2018-01-01')); ?></td>
-				<td><?php echo date('m/Y', strtotime('2018-12-01')); ?></td>
+				<td><?php echo $value['biaya']; ?></td>
+				<td><?php echo $value['kd_sumber']; ?></td>
+				<td><?php echo $value['swakelola']; ?></td>
+				<td><?php echo $value['kerjasama']; ?></td>
+				<td><?php echo $value['pihak_ketiga']; ?></td>
 				<td><?php echo $value['pelaksana']; ?></td>
 			</tr>
-			@endforeach
+			<?php endforeach; ?>
 			<tr>
 				<td align="center" colspan="6">JUMLAH PER BIDANG</td>
-				<td>{{ $subtotalArray[] = $subtotal }}</td>
-				<td></td>
-				<td></td>
+				<td><?php echo $subtotalArray[] = $subtotal; ?></td>
 				<td></td>
 				<td></td>
 				<td></td>
@@ -175,13 +193,11 @@
 				<td></td>
 				<td></td>
 			</tr>	
-			@endforeach
-			@endforeach
+			<?php endforeach; ?>
+			<?php endforeach; ?>
 			<tr>
 				<td align="center" colspan="6">JUMLAH TOTAL</td>
-				<td>{{ array_sum($subtotalArray) }}</td>
-				<td></td>
-				<td></td>
+				<td><?php echo array_sum($subtotalArray); ?></td>
 				<td></td>
 				<td></td>
 				<td></td>
@@ -191,8 +207,8 @@
 			</tr>	
 		</tbody>
 	</table>
-@endforeach
-@endforeach
+	<?php endforeach; ?>
+	<?php endforeach; ?>
 
 <?php echo "<p align='right'>Batang, ".date('d-m-Y')."<br>KEPALA DESA KEPUH<br><br><br>( Ahmad Mubarok )</p>"; ?>
 </div>

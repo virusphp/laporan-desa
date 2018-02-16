@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<?php ini_set('max_execution_time', 300); ?>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>PDF</title>
+	<style>
+		html {
+			font-family: sans-serif;
+		}
+
+		table.table-laporan {
+			margin-top:10px;
+			margin-left:auto; 
+			margin-right:auto;
+			border-collapse: collapse;
+			font-family: sans-serif;
+			color: #444;
+			border: 1px solid #f2f5f7;
+		}
+
+		table.table-laporan {
+			margin-left:auto; 
+			margin-right:auto;
+			border-collapse: collapse;
+			color: #444;
+			border: 1px solid #000;
+		}
+
+		thead tr th {
+			border: 1px solid #880000;
+		}
+
+		.table-laporan tbody tr td {
+			border: 1px solid #000000;
+		}
+		h3 {
+			font-weight: bold;
+			text-align:center;
+		}
+
+		table tr th{
+			font-size: 14px;
+			background: #35A9DB;
+			color: #fff;
+			font-weight: normal;
+			width:40px;
+		}
+
+		.page-break {    
+			page-break-before: avoid;
+		}
+
+		.table-laporan tr td {
+			text-align: center;
+		}
+
+		.lampiran tr td {
+			font-size: 12px;
+		}
+
+		hr {
+			margin-top: 5px;
+		}
+	</style>
+
+</head>
+<body>
+<div class="main-laporan">
+<?php foreach($laporan as $tahun => $th): ?>
+	<?php $subtotalArray = [0]; ?>
+	<?php foreach($th as $kecamatan => $kec): ?>
+	<?php foreach($kec as $desa => $des): ?>
+	<h3>
+		RANCANGAN RPJ M DESA<br>
+		TAHUN <?php echo $tahun; ?>
+	</h3>
+	<hr>
+	<table class="lampiran">
+		<tr>
+			<td>DESA</td>
+			<td>:</td>
+			<td><?php echo $desa; ?></td>
+		</tr>
+		<tr>
+			<td>KECAMATAN</td>
+			<td>:</td>
+			<td><?php echo $kecamatan; ?></td>
+		</tr>
+		<tr>
+			<td>KABUPATEN/KOTA</td>
+			<td>:</td>
+			<td>KABUPATEN BATANG</td>
+		</tr>
+		<tr>
+			<td>PROVINSI</td>
+			<td>:</td>
+			<td>PROVINSI JAWA TENGAH</td>
+		</tr>
+	</table>
+	<table width="100%" class="table-laporan" border="1">
+		<thead>
+			<tr>
+				<th rowspan="2">NO</th>
+				<th colspan="2">JENIS BIDANG</th>
+				<th rowspan="2">
+					LOKASI
+				</th>
+				<th rowspan="2">
+					VOLUME
+				</th>
+				<th rowspan="2">
+					SASARAN/MANFAAT	
+				</th>
+				<th colspan="6">
+					WAKTU PELAKSANAAN
+				</th>
+				<th colspan="2">
+					PERKIRAAN BIAYA & SUMBERDANA
+				</th>
+				<th colspan="3">
+					POLA PELAKSANAAN
+				</th>
+			</tr>
+			<tr>
+				<th>BIDANG/SUB BIDANG</th>
+				<th>JENIS KEGIATAN</th>
+				<th>TH 1</th>
+				<th>TH 2</th>
+				<th>TH 3</th>
+				<th>TH 4</th>
+				<th>TH 5</th>
+				<th>TH 6</th>
+				<th>
+					JUMLAH 
+					(RUPAIAH)
+				</th>
+				<th>SUMBER</th>
+				<th>SWA KELOLA</th>
+				<th>KERJASAMA</th>
+				<th>PIHAK KETIGA</th>
+			</tr>
+			<tr>
+				<th>1</th>
+				<th>2</th>
+				<th>3</th>
+				<th>4</th>
+				<th>5</th>
+				<th>6</th>
+				<th>7</th>
+				<th>8</th>
+				<th>9</th>
+				<th>10</th>
+				<th>11</th>
+				<th>12</th>
+				<th>13</th>
+				<th>14</th>
+				<th>15</th>
+				<th>16</th>
+				<th>17</th>
+			</tr>
+		</thead>
+		<tbody>
+		<?php foreach($des as $kd => $value): ?>
+		<?php foreach($value as $bidang => $value): ?>
+			<?php $rowspan = count($value) + 1; ?>
+			<tr>
+				<!-- Dummy Sample Laporan -->
+				<!-- Rowspan di isi sesuai jumlah count data +1  jika data ada 6 maka rowspan akan otomatis jadi 6+1-->
+				<td rowspan="<?php echo $rowspan ?>">{{ $kd }}</td>
+				<td rowspan="<?php echo $rowspan ?>">{{ $bidang }}</td>
+			</tr>
+			<?php $subtotal = 0; ?>
+			<?php foreach($value as $data => $value): ?>
+			<?php $subtotal += $value['biaya']; ?>
+			<tr>
+				<td><?php echo $value['nama_kegiatan']; ?></td>
+				<td><?php echo $value['lokasi']; ?></td>
+				<td><?php echo $value['Perkiraan_Volum']; ?></td>
+				<td><?php echo $value['sasaran']; ?></td>
+			<!--	<td><?php // $volume = explode(" ",$value['Perkiraan_Volum']); echo !is_null($value['Perkiraan_Volum']) ? $volume[0] : 0 ; ?></td>
+				<td><?php // $volume = explode(" ",$value['Perkiraan_Volum']); echo !is_null($value['Perkiraan_Volum']) ? $volume[1] : 0 ; ?></td> -->
+				<td><?php echo $value['tahun1']; ?></td>
+				<td><?php echo $value['tahun2']; ?></td>
+				<td><?php echo $value['tahun3']; ?></td>
+				<td><?php echo $value['tahun4']; ?></td>
+				<td><?php echo $value['tahun5']; ?></td>
+				<td><?php echo $value['tahun6']; ?></td>
+				<td><?php echo $value['biaya']; ?></td>
+				<td><?php echo $value['sumberdana']; ?></td>
+				<td><?php echo $value['swakelola']; ?></td>
+				<td><?php echo $value['kerjasama']; ?></td>
+				<td><?php echo $value['pihak_ketiga']; ?></td>
+			</tr>
+			<?php endforeach; ?>
+			<?php endforeach; ?>
+			<tr>
+				<td align="center" colspan="12">JUMLAH PER BIDANG</td>
+				<td><?php echo $subtotalArray[] = $subtotal; ?></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>	
+			<?php endforeach; ?>
+			<tr>
+				<td align="center" colspan="12">JUMLAH TOTAL</td>
+				<td><?php echo array_sum($subtotalArray); ?></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>	
+		</tbody>
+	</table>
+	<?php endforeach; ?>
+	<?php endforeach; ?>
+	<?php endforeach; ?>
+
+<?php echo "<p align='right'>Batang, ".date('d-m-Y')."<br>KEPALA DESA KEPUH<br><br><br>( Ahmad Mubarok )</p>"; ?>
+</div>
+	
+</body>
+</html>

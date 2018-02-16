@@ -1,0 +1,17 @@
+.footer {
+    position: absolute !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    /* Set the fixed height of the footer here */
+    background-color: #333 !important;
+    color: #fff !important;
+}
+
+.footer>.container {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.footer p {
+    margin: 0;
+}
