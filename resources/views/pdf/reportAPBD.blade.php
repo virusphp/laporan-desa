@@ -103,7 +103,18 @@
 					<br>
 					769.835.000,00
 					<br>
-					769.835.000,00
+					<?php
+						$m = $s = 0;
+						array_walk($des, function ($a) use (&$m, &$s) {
+							array_walk($a, function ($a) use (&$m, &$s) {
+								array_walk($a, function ($a) use (&$m, &$s) {
+									$m += isset($a["JumlahAnggaran"]) ? $a["JumlahAnggaran"] : 0;
+									$s += isset($a["anggaran_rinc"]) ? $a["anggaran_rinc"] : 0;
+								});
+							});
+						});
+						echo number_format($m, 2, ",", ".");
+					?>
 				</td>
 				<td rowspan="3" style="text-align:center;">
 					Sumber DDS
@@ -133,7 +144,7 @@
 				</td>
 				<td class="no-top">
 			<?php foreach($bid as $data => $value): ?>
-			<?php $subtotal += $value['JumlahAnggaran']; ?>
+			<?php $subtotal += $value['anggaran_rinc']; ?>
 					<br>
 					<?php echo $value['anggaran_rinc']; ?>
 					<br>
@@ -148,7 +159,7 @@
 			<?php endforeach; ?>
 			<tr>
 				<td>JUMLAH BELANJA</td>
-				<td><?php echo number_format(($subtotalArray[] = $subtotal),2,",","."); ?></td>
+				<td><?php echo number_format($s,2,",","."); ?></td>
 			</tr>
 			<tr>
 				<td>SISA LEBIH /(KURANG) PERHITUNGAN ANGGARAN</td>
