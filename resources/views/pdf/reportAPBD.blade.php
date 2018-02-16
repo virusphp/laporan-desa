@@ -64,6 +64,7 @@
 <div class="main-laporan">
 	<?php foreach($laporan as $tahun => $th): ?>
 	<?php foreach($th as $kecamatan => $kec): ?>
+	<?php $subtotalArray = [0]; ?>
 	<?php foreach($kec as $desa => $des): ?>
 	<h3>
 		ANGGARAN PENDAPATAN DAN BELANJA DESA<br>
@@ -118,6 +119,7 @@
 			</tr>
 			<?php foreach($des as $kd => $value): ?>
 			<?php foreach($value as $bidang => $bid): ?>
+			<?php $subtotal = 0; ?>
 			<tr>
 				<td class="no-top">
 					<br>
@@ -131,6 +133,7 @@
 				</td>
 				<td class="no-top">
 			<?php foreach($bid as $data => $value): ?>
+			<?php $subtotal += $value['JumlahAnggaran']; ?>
 					<br>
 					<?php echo $value['anggaran_rinc']; ?>
 					<br>
@@ -145,11 +148,11 @@
 			<?php endforeach; ?>
 			<tr>
 				<td>JUMLAH BELANJA</td>
-				<td>769.835.000,00</td>
+				<td><?php echo number_format(($subtotalArray[] = $subtotal),2,",","."); ?></td>
 			</tr>
 			<tr>
 				<td>SISA LEBIH /(KURANG) PERHITUNGAN ANGGARAN</td>
-				<td>000</td>
+				<?php echo array_sum($subtotalArray); ?>
 				<td>&nbsp;</td>
 			</tr>
 	</table>
