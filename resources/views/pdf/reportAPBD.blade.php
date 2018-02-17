@@ -163,7 +163,7 @@
 			</tr>
 			<tr>
 				<td>SISA LEBIH /(KURANG) PERHITUNGAN ANGGARAN</td>
-				<?php echo array_sum($subtotalArray); ?>
+				<td><?php echo "0"; ?></td>
 				<td>&nbsp;</td>
 			</tr>
 	</table>
