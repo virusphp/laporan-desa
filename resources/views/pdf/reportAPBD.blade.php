@@ -72,9 +72,7 @@
 		TAHUN ANGGARAN <?php echo $tahun; ?>
 	</h3>
 	<hr>
-	<p>
 		Sumberdata : DDS Dana Desa (Droping APBN)
-	</p>	
 	<table width="100%" class="table-laporan" border="1">
 		<thead>
 			<tr>
@@ -101,8 +99,6 @@
 				</td>
 				<td>
 					<br>
-					769.835.000,00
-					<br>
 					<?php
 						$m = $s = 0;
 						array_walk($des, function ($a) use (&$m, &$s) {
@@ -115,6 +111,10 @@
 						});
 						echo number_format($m, 2, ",", ".");
 					?>
+					<br>
+					<?php
+						echo number_format($m, 2, ",", ".");
+					?>
 				</td>
 				<td rowspan="3" style="text-align:center;">
 					Sumber DDS
@@ -122,7 +122,7 @@
 			</tr>
 			<tr>
 				<td>JUMLAH PENDAPATAN</td>
-				<td>769.835.000,00</td>
+				<td><?php echo number_format($m,2, ",", "."); ?></td>
 			</tr>
 			<tr>
 				<td class="no-bottom">BELANJA</td>
@@ -146,9 +146,9 @@
 			<?php foreach($bid as $data => $value): ?>
 			<?php $subtotal += $value['anggaran_rinc']; ?>
 					<br>
-					<?php echo $value['anggaran_rinc']; ?>
+					<?php echo number_format($value['anggaran_rinc'],2, ",", "."); ?>
 					<br>
-					<?php echo $value['JumlahAnggaran']; ?>
+					<?php echo number_format($value['JumlahAnggaran'],2, ",", "."); ?>
 			<?php endforeach; ?>
 				</td>
 				<td class="no-top" style="text-align:center;">
