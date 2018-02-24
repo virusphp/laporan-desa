@@ -132,7 +132,6 @@
 			<?php $subtotal = 0; ?>
 			<tr>
 				<td class="no-top">
-					<br>
 					<u><b><?php echo $bidang; ?></b></u>
 			<?php foreach($bid as $kegiatan => $keg): ?>
 					<br>
@@ -149,8 +148,8 @@
 				</td>
 				<td style="text-align:right;" class="no-top">
 			<?php foreach($bid as $kegiatan => $keg): ?>
-			<?php foreach($keg as $jumlah => $value): ?>
 			<?php// $subtotal += $value['anggaran_rinc']; ?>
+			<?php foreach($keg as $jumlah => $value): ?>
 					<br>
 					<b><?php echo number_format($jumlah,2, ",", "."); ?></b>
 					<br>
