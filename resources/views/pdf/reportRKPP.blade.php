@@ -172,12 +172,12 @@
 			<tr>
 				<td><?php echo $value['nama_kegiatan']; ?></td>
 				<td><?php echo $value['lokasi']; ?></td>
-				<td><?php echo $value['Perkiraan_Volum']; ?></td>
+				<td><?php echo $value['perkiraan_volum']; ?></td>
 				<td><?php echo $value['sasaran']; ?></td>
 				<td><?php echo $value['waktu']; ?></td>
 				<td><?php echo $value['biaya']; ?></td>
 				<td><?php echo $value['kd_sumber']; ?></td>
-				<td><?php echo $value['swakelola']; ?></td>
+				<td><?php echo $value['sewa_kelola']; ?></td>
 				<td><?php echo $value['kerjasama']; ?></td>
 				<td><?php echo $value['pihak_ketiga']; ?></td>
 				<td><?php echo $value['pelaksana']; ?></td>

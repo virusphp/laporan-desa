@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use DB;
 use App\Rencana;
 use App\Rpjmdes;
+use App\Apbd;
 
 class GetApi extends Command
 {
@@ -14,7 +15,7 @@ class GetApi extends Command
      *
      * @var string
      */
-    protected $signature = 'ambil:rkp';
+    protected $signature = 'ambil:data';
 
     /**
      * The console command description.
@@ -40,13 +41,14 @@ class GetApi extends Command
      */
     public function handle()
     {
-	
 		$rpj = $this->decodeApi(config('laporan.api.dua'));
 		$this->getRpjm($rpj);
 
 		$rkp = $this->decodeApi(config('laporan.api.satu'));
 		$this->getRkp($rkp);
-			
+
+		$apbd = $this->decodeApi(config('laporan.api.tiga'));
+		$this->getApbdes($apbd);
     }
 
 	private function getRkp($value)
@@ -96,6 +98,49 @@ class GetApi extends Command
 		}
 	}
 
+	private function getApbdes($value)
+	{
+
+		$dataApbdes = json_decode($value, true);
+		if ($dataApbdes) {
+			$masuk = 0;
+			Rpjmdes::truncate();
+			foreach($dataApbdes as $data) {
+				$saveApbdes = DB::table('apbds')->insert([
+					'tahun' => $data['tahun'],
+					'kd_kec' => $data['kd_kec'],
+					'nama_kecamatan' => $data['nama_kecamatan'],
+					'kd_desa' => $data['kd_desa'],
+					'nama_desa' => $data['nama_desa'],
+					'kd_bid' => $data['kd_bid'],
+					'nama_bidang' => $data['nama_bidang'],
+					'kd_keg' => $data['kd_keg'],
+					'nama_kegiatan' => $data['nama_kegiatan'],
+					'kd_rincian' => $data['kd_rincian'],
+					'jns_belanja' => $data['jns_belanja'],
+					'nama_jenis' => $data['nama_jenis'],
+					'nama_obyek' => $data['nama_obyek'],
+					'anggaran_rinc' => $data['anggaran_rinc'],
+					'jumlah_anggaran' => $data['JumlahAnggaran'],
+				]);
+
+				if ($saveApbdes) {
+					$this->info($data['nama_desa']. ' Tersinkron ke database');
+					$masuk += 1;
+				}
+			}
+
+			if ($masuk == 0) {
+				$this->comment('tidak ada sincron data baru');
+			} else {
+				$this->comment($masuk. 'Data tersinkron semua');
+			}
+		} else {
+			$this->info('tidak ada yang disincronkan');
+		}
+
+	}
+	
 	private function getRpjm($value)
 	{
 

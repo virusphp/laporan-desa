@@ -102,16 +102,16 @@
 						array_walk($des, function ($a) use (&$m, &$s) {
 							array_walk($a, function ($a) use (&$m, &$s) {
 								array_walk($a, function ($a) use (&$m, &$s) {
-									array_walk($a, function ($a) use (&$m, &$s) {
-										array_walk($a, function ($a) use (&$m, &$s) {
-											$s += isset($a["anggaran_rinc"]) ? $a["anggaran_rinc"] : 0;
-										});
-									});
+									$m += isset($a["jumlah_anggaran"]) ? $a["jumlah_anggaran"] : 0;
+									$s += isset($a["anggaran_rinc"]) ? $a["anggaran_rinc"] : 0;
 								});
 							});
 						});
 					?>
-					<?php echo number_format($dds->anggaran_dds,2, ",", "."); ?>
+					<br>
+					<?php
+						echo number_format($m, 2, ",", ".");
+					?>
 				</td>
 				<td rowspan="3" style="text-align:center;">
 					Sumber DDS
@@ -120,7 +120,7 @@
 			<tr>
 				<td style="text-align:center;">JUMLAH PENDAPATAN</td>
 				<td style="text-align:right;">
-					<?php echo number_format($dds->anggaran_dds,2, ",", "."); ?>
+					<?php echo number_format($m,2, ",", "."); ?>
 				</td>
 			</tr>
 			<tr>
@@ -134,32 +134,20 @@
 				<td class="no-top">
 					<br>
 					<u><b><?php echo $bidang; ?></b></u>
-			<?php foreach($bid as $kegiatan => $keg): ?>
+			<?php foreach($bid as $data => $value): ?>
 					<br>
-					<b><?php echo $kegiatan; ?></b>
+					<b><?php echo $value['nama_kegiatan']; ?></b>
 					<br>
-			<?php foreach($keg as $jumlah => $value): ?>
-					<?php echo $value[0]['nama_jenis']; ?>
-			<?php foreach($value as $objek => $value): ?>
-					<br>
-					<?php echo $value['nama_obyek']; ?>
-			<?php endforeach; ?>
-			<?php endforeach; ?>
+					<?php echo $value['nama_jenis']; ?>
 			<?php endforeach; ?>
 				</td>
 				<td style="text-align:right;" class="no-top">
-			<?php foreach($bid as $kegiatan => $keg): ?>
-			<?php foreach($keg as $jumlah => $value): ?>
-			<?php// $subtotal += $value['anggaran_rinc']; ?>
+			<?php foreach($bid as $data => $value): ?>
+			<?php $subtotal += $value['anggaran_rinc']; ?>
 					<br>
-					<b><?php echo number_format($jumlah,2, ",", "."); ?></b>
+					<b><?php echo number_format($value['anggaran_rinc'],2, ",", "."); ?></b>
 					<br>
-					<?php echo number_format($jumlah,2, ",", "."); ?>
-			<?php foreach($value as $objek => $value): ?>
-					<br>
-					<?php echo number_format($value['anggaran_rinc'],2, ",", "."); ?>
-			<?php endforeach; ?>
-			<?php endforeach; ?>
+					<?php echo number_format($value['jumlah_anggaran'],2, ",", "."); ?>
 			<?php endforeach; ?>
 				</td>
 				<td class="no-top" style="text-align:center;">
@@ -169,8 +157,8 @@
 			<?php endforeach; ?>
 			<?php endforeach; ?>
 			<tr>
-				<td><b>JUMLAH BELANJA</b></td>
-				<td style="text-align:right;"><b><?php echo number_format($s,2,",","."); ?></b></td>
+				<td>JUMLAH BELANJA</td>
+				<td style="text-align:right;"><?php echo number_format($s,2,",","."); ?></td>
 			</tr>
 			<tr>
 				<td>SISA LEBIH /(KURANG) PERHITUNGAN ANGGARAN</td>

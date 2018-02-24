@@ -17,7 +17,7 @@ class PdfController extends Controller
 	public function reportRKP(Request $request)
 	{
 //		$data = Renja::select("*")->get();
-		$data = DB::table('smas_rkpdes')->where(function($query) use ($request) {
+		$data = DB::table('rencanas')->where(function($query) use ($request) {
 			$query->where('kd_kec',$request->kd_kec)
 				->where('kd_desa',$request->kd_desa);
 		})->get();
@@ -35,7 +35,7 @@ class PdfController extends Controller
 	public function reportRKPP(Request $request)
 	{
 //		$data = Renja::select("*")->get();
-		$data = DB::table('smas_rkpdes')->where(function($query) use ($request) {
+		$data = DB::table('rencanas')->where(function($query) use ($request) {
 			$query->where('kd_kec',$request->kd_kec)
 				->where('kd_desa',$request->kd_desa);
 		})->get();
@@ -70,11 +70,16 @@ class PdfController extends Controller
 
 	public function reportAPBD(Request $request)
 	{
-		$data = DB::table('smas_apbdes')->where(function ($query) use ($request) {
+		$data = DB::table('apbds')->where(function ($query) use ($request) {
 			$query->where('tahun', $request->tahun)
 				->where('kd_kec', $request->kd_kec)
 				->where('kd_desa', $request->kd_desa);
 		})->get();
+		$dds = DB::table('anggarans')->where(function($query) use ($request) {
+			$query->where('tahun', $request->tahun)
+				->where('kd_kec', $request->kd_kec)
+				->where('kd_desa', $request->kd_desa);
+		})->first();
 //		$data = $this->decodeApi(config('laporan.api.tiga'));
 		$laporan = $this->selectAPBD($data);
 //		$pdf = PDF::loadView('pdf.pdf', compact('laporan'))->setPaper('letter', 'landscape');
@@ -83,11 +88,11 @@ class PdfController extends Controller
 //		dd($laporan);
 //		return view('welcome', compact('data'));
 //		return $pdf->stream('laporan.pdf');
-		return view('pdf.reportAPBD',compact('laporan'));
+		return view('pdf.reportAPBD',compact('laporan','dds'));
 		
 	}
 
-	private function selectAPBD($value)
+	private function selectAPBDbackup($value)
 	{
 		$dataDecode = json_decode($value, true);
 		$dataApi = array();
@@ -103,11 +108,26 @@ class PdfController extends Controller
 //		return $dataDecode;
 		return $dataApi;
 	}
-
-	private function apbdHeader($value)
+	
+	private function selectAPBD($value)
 	{
-
+		$dataDecode = json_decode($value, true);
+		$dataApi = array();
+		foreach($dataDecode as $key => $val) {
+			$key1 = $val['tahun'];
+			$key2 = $val['nama_kecamatan'];
+			$key3 = $val['nama_desa'];
+			$key4 = $val['kd_bid'];
+			$key5 = $val['nama_bidang'];
+			$key6 = $val['nama_kegiatan'];
+			$key7 = $val['jumlah_anggaran'];
+			unset($val['tahun'],$val['nama_kecamatan'], $val['nama_desa'],$val['jumlah_anggaran'],$val['kd_bid'],$val['nama_kegiatan'], $val['nama_bidang']);
+			$dataApi[$key1][$key2][$key3][$key4][$key5][$key6][$key7][] = $val;
+		}
+//		return $dataDecode;
+		return $dataApi;
 	}
+
 
 	private function selectRKP($value)
 	{

@@ -12,14 +12,14 @@ class ApbdController extends Controller
 	//
 	public function index()
 	{
-		$tahun = DB::table('smas_apbdes')->pluck('tahun','tahun')->all();
+		$tahun = DB::table('apbds')->pluck('tahun','tahun')->all();
 		return view('apbd.index', compact('tahun'));
 	}
 
 	public function getKecamatan(Request $request)
 	{
 		if($request->ajax()) {
-			$kecamatan = DB::table('smas_apbdes')->where('tahun',$request->tahun)->pluck('nama_kecamatan','kd_kec')->all();
+			$kecamatan = DB::table('apbds')->where('tahun',$request->tahun)->pluck('nama_kecamatan','kd_kec')->all();
 			$data = view('dropdown.ajax-kecamatan',compact('kecamatan'))->render();
 			return response()->json(['options' => $data]);
 		}	
@@ -28,7 +28,7 @@ class ApbdController extends Controller
 	public function getDesa(Request $request)
 	{
 		if($request->ajax()) {
-			$desa = DB::table('smas_apbdes')->where(function($query) use ($request){
+			$desa = DB::table('apbds')->where(function($query) use ($request){
 					$query->where('tahun',$request->tahun)
 					->where('kd_kec',$request->kd_kec);
 			})->pluck('nama_desa','kd_desa')->all();
@@ -41,7 +41,10 @@ class ApbdController extends Controller
 
  	public function apiAPBD()
 	{
-		$data = DB::table('smas_apbdes')->where('tahun', 2018)->get();
+		$data = DB::table('apbds')
+			->select('tahun','nama_kecamatan','nama_desa','kd_bid','nama_bidang','nama_kegiatan','nama_jenis','nama_obyek','anggaran_rinc','jumlah_anggaran')
+			->where('tahun', 2018)
+			->get();
 		$apbdes = $this->selectAPBD($data);
 
 		return response()->json($apbdes);
@@ -57,8 +60,10 @@ class ApbdController extends Controller
 			$key3 = $val['nama_desa'];
 			$key4 = $val['kd_bid'];
 			$key5 = $val['nama_bidang'];
-			unset($val['tahun'],$val['nama_kecamatan'], $val['nama_desa'],$val['kd_bid'], $val['nama_bidang']);
-			$dataApi[$key1][$key2][$key3][$key4][$key5][] = $val;
+			$key6 = $val['nama_kegiatan'];
+			$key7 = $val['jumlah_anggaran'];
+			unset($val['tahun'],$val['nama_kecamatan'], $val['nama_desa'],$val['jumlah_anggaran'],$val['kd_bid'],$val['nama_kegiatan'], $val['nama_bidang']);
+			$dataApi[$key1][$key2][$key3][$key4][$key5][$key6][$key7][] = $val;
 		}
 //		return $dataDecode;
 		return $dataApi;
