@@ -80,6 +80,12 @@ class PdfController extends Controller
 				->where('kd_kec', $request->kd_kec)
 				->where('kd_desa', $request->kd_desa);
 		})->first();
+		$modal = DB::table('penyertaan_modals')->where(function($query) use ($request) {
+			$query->where('tahun', $request->tahun)
+				->where('kd_kec', $request->kd_kec)
+				->where('kd_desa', $request->kd_desa);
+		})->first();
+
 //		$data = $this->decodeApi(config('laporan.api.tiga'));
 		$laporan = $this->selectAPBD($data);
 //		$pdf = PDF::loadView('pdf.pdf', compact('laporan'))->setPaper('letter', 'landscape');
@@ -88,7 +94,7 @@ class PdfController extends Controller
 //		dd($laporan);
 //		return view('welcome', compact('data'));
 //		return $pdf->stream('laporan.pdf');
-		return view('pdf.reportAPBD',compact('laporan','dds'));
+		return view('pdf.reportAPBD',compact('laporan','dds','modal'));
 		
 	}
 

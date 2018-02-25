@@ -46,6 +46,11 @@
 			border-top: none;
 		}
 
+		.border-kanan {
+			border-right: 1px;
+		}
+
+
 		.table-laporan tr td {
 			text-align: left;
 		}
@@ -170,10 +175,32 @@
 			<tr>
 				<td><b>JUMLAH BELANJA</b></td>
 				<td style="text-align:right;"><b><?php echo number_format($s,2,",","."); ?></b></td>
+				<td class="no-top" >&nbsp;</td>
+			</tr>
+			<tr>
+				<td><b>SURPLUS/(DEFISIT)</b></td>
+				<td style="text-align:right;"><b><?php echo number_format($modal->anggaran_dds,2,",","."); ?></b></td>
+				<td class="no-top" >&nbsp;</td>
+			</tr>
+			<tr>
+				<td>
+					<b>PEMBELANJAAN DESA</b>
+					<br>	
+					<b>Pengeluaran Pembiayaan</b>
+					<br>	
+					Pengeluaran Pembiayaan
+				</td>
+				<td style="text-align:right;">
+					<br>
+					<b><?php echo number_format($modal->anggaran_dds,2,",","."); ?></b>
+					<br>
+					<?php echo number_format($modal->anggaran_dds,2,",","."); ?>
+				</td>
+				<td class="no-top" >&nbsp;</td>
 			</tr>
 			<tr>
 				<td>SISA LEBIH /(KURANG) PERHITUNGAN ANGGARAN</td>
-				<td><?php echo "0"; ?></td>
+				<td style="text-align:right;"><?php echo number_format(0,2,",","."); ?></td>
 				<td>&nbsp;</td>
 			</tr>
 	</table>
