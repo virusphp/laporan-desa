@@ -12,14 +12,14 @@ class ApbdController extends Controller
 	//
 	public function index()
 	{
-		$tahun = DB::table('apbds')->pluck('tahun','tahun')->all();
+		$tahun = DB::table('smas_apbdes')->pluck('tahun','tahun')->all();
 		return view('apbd.index', compact('tahun'));
 	}
 
 	public function getKecamatan(Request $request)
 	{
 		if($request->ajax()) {
-			$kecamatan = DB::table('apbds')->where('tahun',$request->tahun)->pluck('nama_kecamatan','kd_kec')->all();
+			$kecamatan = DB::table('smas_apbdes')->where('tahun',$request->tahun)->pluck('nama_kecamatan','kd_kec')->all();
 			$data = view('dropdown.ajax-kecamatan',compact('kecamatan'))->render();
 			return response()->json(['options' => $data]);
 		}	
@@ -28,7 +28,7 @@ class ApbdController extends Controller
 	public function getDesa(Request $request)
 	{
 		if($request->ajax()) {
-			$desa = DB::table('apbds')->where(function($query) use ($request){
+			$desa = DB::table('smas_apbdes')->where(function($query) use ($request){
 					$query->where('tahun',$request->tahun)
 					->where('kd_kec',$request->kd_kec);
 			})->pluck('nama_desa','kd_desa')->all();
@@ -41,7 +41,7 @@ class ApbdController extends Controller
 
  	public function apiAPBD()
 	{
-		$data = DB::table('apbds')
+		$data = DB::table('smas_apbdes')
 			->select('tahun','nama_kecamatan','nama_desa','kd_bid','nama_bidang','nama_kegiatan','nama_jenis','nama_obyek','anggaran_rinc','jumlah_anggaran')
 			->where('tahun', 2018)
 			->get();

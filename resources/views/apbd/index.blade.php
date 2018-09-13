@@ -13,7 +13,7 @@
                         <h2 class="panel-title">Pencarian Laporan</h2>
                     </div>
                     <div class="panel-body">
-						{!! Form::open(['url' => route('apbd.search'),
+						            {!! Form::open(['url' => route('apbd.search'),
                         	'method' => 'post', 'class'=>'form-horizontal']) !!}
                             @include('rpj._form')
                         {!! Form::close() !!}

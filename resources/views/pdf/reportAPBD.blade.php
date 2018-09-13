@@ -146,7 +146,7 @@
 					<?php echo $value[0]['nama_jenis']; ?>
 			<?php foreach($value as $objek => $value): ?>
 					<br>
-					<?php echo $value['nama_obyek']; ?>
+					<?php echo $value['?nama_kegiatan']; ?>
 			<?php endforeach; ?>
 			<?php endforeach; ?>
 			<?php endforeach; ?>

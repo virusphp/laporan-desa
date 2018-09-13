@@ -70,17 +70,17 @@ class PdfController extends Controller
 
 	public function reportAPBD(Request $request)
 	{
-		$data = DB::table('apbds')->where(function ($query) use ($request) {
+		$data = DB::table('smas_apbdes')->where(function ($query) use ($request) {
 			$query->where('tahun', $request->tahun)
 				->where('kd_kec', $request->kd_kec)
 				->where('kd_desa', $request->kd_desa);
 		})->get();
-		$dds = DB::table('anggarans')->where(function($query) use ($request) {
+		$dds = DB::table('smas_anggaran')->where(function($query) use ($request) {
 			$query->where('tahun', $request->tahun)
 				->where('kd_kec', $request->kd_kec)
 				->where('kd_desa', $request->kd_desa);
 		})->first();
-		$modal = DB::table('penyertaan_modals')->where(function($query) use ($request) {
+		$modal = DB::table('smas_penyertaanmodal')->where(function($query) use ($request) {
 			$query->where('tahun', $request->tahun)
 				->where('kd_kec', $request->kd_kec)
 				->where('kd_desa', $request->kd_desa);
@@ -126,7 +126,7 @@ class PdfController extends Controller
 			$key4 = $val['kd_bid'];
 			$key5 = $val['nama_bidang'];
 			$key6 = $val['nama_kegiatan'];
-			$key7 = $val['jumlah_anggaran'];
+			$key7 = $val['jumlahanggaran'];
 			unset($val['tahun'],$val['nama_kecamatan'], $val['nama_desa'],$val['jumlah_anggaran'],$val['kd_bid'],$val['nama_kegiatan'], $val['nama_bidang']);
 			$dataApi[$key1][$key2][$key3][$key4][$key5][$key6][$key7][] = $val;
 		}
