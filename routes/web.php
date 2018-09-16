@@ -40,3 +40,8 @@ Auth::routes();
 Route::get('/api/v1/rkp', 'RkpController@apiRKP')->name('api.rkp')->middleware('cors');
 Route::get('/api/v1/rpj', 'RpjController@apiRPJ')->name('api.rpj')->middleware('cors');
 Route::get('/api/v1/apbd', 'ApbdController@apiAPBD')->name('api.apbd')->middleware('cors');
+
+//Rkpdes
+Route::post('/rkpdes/desa', 'RkpController@getDesa')->name('rkpdes.desa');
+Route::get('/portal/rkpdes', 'RkpdesController@index')->name('rkpdes.index');
+Route::post('/rkpdes', 'RkpdesController@reportRkpDes')->name('rkpdes.pdf');

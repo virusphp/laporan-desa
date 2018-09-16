@@ -30,7 +30,8 @@
                         <li><a class="nav-link" href="{{ route('rkp.index') }}">Rencana Kegiatan</a></li>
                         <li><a class="nav-link" href="{{ route('rkpp.index') }}">Rencana Kerja</a></li>
                         <li><a class="nav-link" href="{{ route('rpj.index') }}">Rencana RPJ</a></li>
-						<li><a class="nav-link" href="{{ route('apbd.index') }}">Anggaran Pendapatan</a></li>
+                        <li><a class="nav-link" href="{{ route('apbd.index') }}">Anggaran Pendapatan</a></li>
+                        <li><a class="nav-link" href="{{ route('rkpdes.index') }}">RKP DESA</a></li>
 					{{--
 						<li><a class="nav-link" href="{{ route('api.rkp') }}">API Renja</a></li>
 						<li><a class="nav-link" href="{{ route('api.rpj') }}">API RKP</a></li> 

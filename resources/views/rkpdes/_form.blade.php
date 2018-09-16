@@ -1,8 +1,8 @@
 <div class="form-group{{ $errors->has('category_id') ? ' has-error' : '' }}">
-	<label for="tahun" class="col-md-4 control-label">Tahun</label>
+	<label for="kd_desa" class="col-md-4 control-label">Desa</label>
 
 	<div class="col-md-6">
-		{{ Form::select('tahun', ['' => '--Pilih tahun--']+$tahun, null, ['class' => 'form-control', 'id' => 'tahun']) }}
+		{{ Form::select('tahun',['' => '--Pilih Tahun--','2018' => '2018'], null, ['class' => 'form-control', 'required' => 'required']) }}
 	</div>
 </div>
 
@@ -10,7 +10,7 @@
 	<label for="kd_kec" class="col-md-4 control-label">Kecamatan</label>
 
 	<div class="col-md-6">
-		{{ Form::select('kd_kec', ['' => '--Pilih Kecamatan--'], null, ['class' => 'form-control', 'id' => 'kecamatan']) }}
+		{{ Form::select('kd_kec', ['' => '--Pilih Kecamatan--']+$kecamatan, null, ['class' => 'form-control', 'id' => 'kecamatan']) }}
 	</div>
 </div>
 
@@ -27,4 +27,3 @@
 		{!! Form::submit('Cari', ['class'=>'btn btn-primary']) !!}
     </div>
 </div>
-

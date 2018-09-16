@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
 <div class="container">
         <div class="row">
@@ -13,9 +12,9 @@
                         <h2 class="panel-title">Pencarian Laporan</h2>
                     </div>
                     <div class="panel-body">
-						{!! Form::open(['url' => route('rkp.search'),
+						{!! Form::open(['url' => route('rkpdes.pdf'),
                         	'method' => 'post', 'class'=>'form-horizontal']) !!}
-                            @include('rkp._form')
+                            @include('rkpdes._form')
                         {!! Form::close() !!}
                     </div>
                 </div>
@@ -30,7 +29,7 @@ $("select[name='kd_kec']").change(function() {
   var kd_kec = $(this).val();
   var token = $("input[name='_token']").val();
   $.ajax({
-    url : "{{ route('rkp.desa') }}",
+    url : "{{ route('rkpdes.desa') }}",
     method : "POST",
     data : {
 		kd_kec : kd_kec,
