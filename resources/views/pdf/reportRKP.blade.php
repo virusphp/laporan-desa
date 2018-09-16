@@ -160,8 +160,8 @@
 			<tr>
 				<td><?php echo $value['nama_kegiatan'];?></td>
 				<td><?php echo $value['lokasi']; ?></td>
-				<td><?php $volume = explode(" ",$value['Perkiraan_Volum']); echo !is_null($value['Perkiraan_Volum']) ? $volume[0] : 0 ; ?></td>
-				<td><?php $volume = explode(" ",$value['Perkiraan_Volum']); echo !is_null($value['Perkiraan_Volum']) ? $volume[1] : 0 ; ?></td>
+				<td><?php $volume = explode(" ",$value['perkiraan_volum']); echo !is_null($value['perkiraan_volum']) ? $volume[0] : 0 ; ?></td>
+				<td><?php $volume = explode(" ",$value['perkiraan_volum']); echo !is_null($value['perkiraan_volum']) ? $volume[1] : 0 ; ?></td>
 				<td><?php echo $value['biaya']; ?></td>
 				<td><?php echo rand(1,100); ?></td>
 				<td><?php echo rand(1,100); ?></td>

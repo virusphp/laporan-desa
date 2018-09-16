@@ -11,6 +11,7 @@ class RkpController extends Controller
     //
 	public function index()
 	{
+		// $data = base64_decode(config('laporan.api.satu'));
 		$kecamatan = DB::table('smas_rkpdes')->pluck('nama_kecamatan','kd_kec')->all();
 		return view('rkp.index', compact('kecamatan'));
 	}	

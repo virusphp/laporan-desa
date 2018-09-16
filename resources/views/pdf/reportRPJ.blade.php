@@ -177,7 +177,7 @@
 			<tr>
 				<td><?php echo $value['nama_kegiatan']; ?></td>
 				<td><?php echo $value['lokasi']; ?></td>
-				<td><?php echo $value['Perkiraan_Volum']; ?></td>
+				<td><?php echo $value['perkiraan_volum']; ?></td>
 				<td><?php echo $value['sasaran']; ?></td>
 			<!--	<td><?php // $volume = explode(" ",$value['Perkiraan_Volum']); echo !is_null($value['Perkiraan_Volum']) ? $volume[0] : 0 ; ?></td>
 				<td><?php // $volume = explode(" ",$value['Perkiraan_Volum']); echo !is_null($value['Perkiraan_Volum']) ? $volume[1] : 0 ; ?></td> -->

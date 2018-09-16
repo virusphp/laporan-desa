@@ -177,7 +177,7 @@
 				<td><?php echo $value['waktu']; ?></td>
 				<td><?php echo $value['biaya']; ?></td>
 				<td><?php echo $value['kd_sumber']; ?></td>
-				<td><?php echo $value['sewa_kelola']; ?></td>
+				<td><?php echo $value['swakelola']; ?></td>
 				<td><?php echo $value['kerjasama']; ?></td>
 				<td><?php echo $value['pihak_ketiga']; ?></td>
 				<td><?php echo $value['pelaksana']; ?></td>

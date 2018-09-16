@@ -16,12 +16,13 @@ class PdfController extends Controller
 	// Generate PDF
 	public function reportRKP(Request $request)
 	{
-//		$data = Renja::select("*")->get();
-		$data = DB::table('rencanas')->where(function($query) use ($request) {
+		// $data = Renja::select("*")->get();
+		$data = DB::table('smas_rkpdes')->where(function($query) use ($request) {
 			$query->where('kd_kec',$request->kd_kec)
 				->where('kd_desa',$request->kd_desa);
 		})->get();
-//		$data = $this->decodeApi(config('laporan.api.satu'));
+		// $data = $this->decodeApi(config('laporan.api.satu'));
+		// dd($data);
 		$laporan = $this->selectRKP($data);
 //		$pdf = PDF::loadView('pdf.reportRKP', compact('laporan'))->setPaper('f4', 'landscape');
 //		header("Content-type:application/json");
@@ -35,11 +36,12 @@ class PdfController extends Controller
 	public function reportRKPP(Request $request)
 	{
 //		$data = Renja::select("*")->get();
-		$data = DB::table('rencanas')->where(function($query) use ($request) {
+		$data = DB::table('smas_rkpdes')->where(function($query) use ($request) {
 			$query->where('kd_kec',$request->kd_kec)
 				->where('kd_desa',$request->kd_desa);
 		})->get();
-//		$data = $this->decodeApi(config('laporan.api.satu'));
+		// $data = $this->decodeApi(config('laporan.api.satu'));
+		// dd($data);
 		$laporan = $this->selectRKP($data);
 //		$pdf = PDF::loadView('pdf.reportRKP', compact('laporan'))->setPaper('letter', 'landscape');
 //		header("Content-type:application/json");
@@ -57,6 +59,7 @@ class PdfController extends Controller
 				->where('kd_kec', $request->kd_kec)
 				->where('kd_desa', $request->kd_desa);
 		})->get();
+		// $data = $this->decodeApi(config('laporan.api.dua'));
 		$laporan = $this->selectRPJ($data);
 //		$pdf = PDF::loadView('pdf.pdf', compact('laporan'))->setPaper('letter', 'landscape');
 //		header("Content-type:application/json");
@@ -85,9 +88,10 @@ class PdfController extends Controller
 				->where('kd_kec', $request->kd_kec)
 				->where('kd_desa', $request->kd_desa);
 		})->first();
-
-//		$data = $this->decodeApi(config('laporan.api.tiga'));
+		// dd($request->all());
+		// $data = $this->decodeApi(config('laporan.api.tiga'));
 		$laporan = $this->selectAPBD($data);
+		// dd($laporan);
 //		$pdf = PDF::loadView('pdf.pdf', compact('laporan'))->setPaper('letter', 'landscape');
 //		header("Content-type:application/json");
 //		print json_encode($laporan,  JSON_PRETTY_PRINT);
@@ -127,7 +131,7 @@ class PdfController extends Controller
 			$key5 = $val['nama_bidang'];
 			$key6 = $val['nama_kegiatan'];
 			$key7 = $val['jumlahanggaran'];
-			unset($val['tahun'],$val['nama_kecamatan'], $val['nama_desa'],$val['jumlah_anggaran'],$val['kd_bid'],$val['nama_kegiatan'], $val['nama_bidang']);
+			unset($val['tahun'],$val['nama_kecamatan'], $val['nama_desa'],$val['jumlahanggaran'],$val['kd_bid'],$val['nama_kegiatan'], $val['nama_bidang']);
 			$dataApi[$key1][$key2][$key3][$key4][$key5][$key6][$key7][] = $val;
 		}
 //		return $dataDecode;
