@@ -11,7 +11,7 @@ class RkppController extends Controller
 	//
 	public function index()
 	{
-		$kecamatan = DB::table('smas_rkpdes')->pluck('nama_kecamatan','kd_kec')->all();
+		$kecamatan = DB::table('v_kecamatan')->where('id_kabupaten','=', 'JTGKAB001')->pluck('nama_kecamatan','id_smas_kecamatan')->all();
 		return view('rkpp.index', compact('kecamatan'));
 	}	
 
@@ -23,7 +23,7 @@ class RkppController extends Controller
 	public function getDesa(Request $request)
 	{
 		if($request->ajax()) {
-			$desa = DB::table('smas_rkpdes')->where('kd_kec',$request->kd_kec)->pluck('nama_desa','kd_desa')->all();
+			$desa = DB::table('v_desa')->where('id_smas_kecamatan',$request->id_smas_kecamatan)->pluck('nama_desa','id_smas_desa')->all();
 			$data = view('dropdown.ajax-desa',compact('desa'))->render();
 			return response()->json(['options' => $data]);
 		}	

@@ -2,7 +2,7 @@
 	<label for="kd_kec" class="col-md-4 control-label">Kecamatan</label>
 
 	<div class="col-md-6">
-		{{ Form::select('kd_kec', ['' => '--Pilih Kecamatan--']+$kecamatan, null, ['class' => 'form-control', 'id' => 'kecamatan']) }}
+		{{ Form::select('id_smas_kecamatan', ['' => '--Pilih Kecamatan--']+$kecamatan, null, ['class' => 'form-control', 'id' => 'kecamatan']) }}
 	</div>
 </div>
 
@@ -10,7 +10,7 @@
 	<label for="kd_desa" class="col-md-4 control-label">Desa</label>
 
 	<div class="col-md-6">
-		{{ Form::select('kd_desa',	['' => '--Pilih Desa--'], null, ['id' => 'desa', 'class' => 'form-control']) }}
+		{{ Form::select('id_smas_desa',	['' => '--Pilih Desa--'], null, ['id' => 'desa', 'class' => 'form-control']) }}
 	</div>
 </div>
 

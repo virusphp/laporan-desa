@@ -26,19 +26,19 @@
 @push('scripts')
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script type="text/javascript">
-$("select[name='kd_kec']").change(function() {
-  var kd_kec = $(this).val();
+$("select[name='id_smas_kecamatan']").change(function() {
+  var id_smas_kecamatan = $(this).val();
   var token = $("input[name='_token']").val();
   $.ajax({
     url : "{{ route('rkp.desa') }}",
     method : "POST",
     data : {
-		kd_kec : kd_kec,
+		id_smas_kecamatan : id_smas_kecamatan,
 		_token : token
     },
     success : function(data) {
 		console.log(data.options);	
-   	  	$("select[name='kd_desa']").html('');
+   	  	$("#desa").html('');
       	$("#desa").html(data.options);
       //
     }

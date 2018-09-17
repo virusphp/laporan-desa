@@ -18,7 +18,7 @@ Route::get('/', function() {
 Route::get('/portal/rkp', 'RkpController@index')->name('rkp.index');
 Route::post('/rkp/desa', 'RkpController@getDesa')->name('rkp.desa');
 
-// Rencana Kerja
+// Rencana Kerja 
 Route::get('/portal/rkpp', 'RkppController@index')->name('rkpp.index');
 
 // RPJ M

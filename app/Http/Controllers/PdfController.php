@@ -16,19 +16,29 @@ class PdfController extends Controller
 	// Generate PDF
 	public function reportRKP(Request $request)
 	{
+		// dd($request->all());
 		// $data = Renja::select("*")->get();
-		$data = DB::table('smas_rkpdes')->where(function($query) use ($request) {
-			$query->where('kd_kec',$request->kd_kec)
-				->where('kd_desa',$request->kd_desa);
-		})->get();
+		// $data = DB::table('smas_rkpdes')->where(function($query) use ($request) {
+		// 	$query->where('kd_kec',$request->kd_kec)
+		// 		->where('kd_desa',$request->kd_desa);
+		// })->get();
+		$data = DB::table('v_desa as v')
+			->select('v.jbt_kades','v.nm_kades','s.*')
+			->join('smas_rkpdes as s', function($join) {
+				$join->on('v.kd_kec','=','s.kd_kec')
+					->on('v.kd_desa','=','s.kd_desa');
+			})
+			->where([['v.id_smas_desa', '=', $request->id_smas_desa],['v.id_smas_kecamatan','=',$request->id_smas_kecamatan]])
+			->get();
+
 		// $data = $this->decodeApi(config('laporan.api.satu'));
-		// dd($data);
 		$laporan = $this->selectRKP($data);
-//		$pdf = PDF::loadView('pdf.reportRKP', compact('laporan'))->setPaper('f4', 'landscape');
+		// dd($laporan);
+		// $pdf = PDF::loadView('pdf.reportRKP', compact('laporan'))->setPaper('f4', 'landscape');
 //		header("Content-type:application/json");
 //		print json_encode($laporan,  JSON_PRETTY_PRINT);
 //		dd($laporan);
-//		return $pdf->stream('laporan.pdf');
+		// return $pdf->stream('laporan.pdf');
 		return view('pdf.reportRKP',compact('laporan'));
 		
 	}
@@ -36,13 +46,21 @@ class PdfController extends Controller
 	public function reportRKPP(Request $request)
 	{
 //		$data = Renja::select("*")->get();
-		$data = DB::table('smas_rkpdes')->where(function($query) use ($request) {
-			$query->where('kd_kec',$request->kd_kec)
-				->where('kd_desa',$request->kd_desa);
-		})->get();
+		// $data = DB::table('smas_rkpdes')->where(function($query) use ($request) {
+		// 	$query->where('kd_kec',$request->kd_kec)
+		// 		->where('kd_desa',$request->kd_desa);
+		// })->get();
+		$data = DB::table('v_desa as v')
+			->select('v.jbt_kades','v.nm_kades','s.*')
+			->join('smas_rkpdes as s', function($join) {
+				$join->on('v.kd_kec','=','s.kd_kec')
+					->on('v.kd_desa','=','s.kd_desa');
+			})
+			->where([['v.id_smas_desa', '=', $request->id_smas_desa],['v.id_smas_kecamatan','=',$request->id_smas_kecamatan]])
+			->get();
 		// $data = $this->decodeApi(config('laporan.api.satu'));
-		// dd($data);
 		$laporan = $this->selectRKP($data);
+		// dd($laporan);
 //		$pdf = PDF::loadView('pdf.reportRKP', compact('laporan'))->setPaper('letter', 'landscape');
 //		header("Content-type:application/json");
 //		print json_encode($laporan,  JSON_PRETTY_PRINT);
@@ -144,12 +162,14 @@ class PdfController extends Controller
 		$dataDecode = json_decode($value, true);
 		$dataApi = array();
 		foreach($dataDecode as $key => $val) {
-			$key1 = $val['nama_kecamatan'];
-			$key2 = $val['nama_desa'];
-			$key3 = $val['kd_bid'];
-			$key4 = $val['nama_bidang'];
-			unset($val['nama_kecamatan'], $val['nama_desa'],$val['kd_bid'], $val['nama_bidang']);
-			$dataApi[$key1][$key2][$key3][$key4][] = $val;
+			$key1 = $val['jbt_kades'];
+			$key2 = $val['nm_kades'];
+			$key3 = $val['nama_kecamatan'];
+			$key4 = $val['nama_desa'];
+			$key5 = $val['kd_bid'];
+			$key6 = $val['nama_bidang'];
+			unset($val['jbt_kades'],$val['nm_kades'],$val['nama_kecamatan'], $val['nama_desa'],$val['kd_bid'], $val['nama_bidang']);
+			$dataApi[$key1][$key2][$key3][$key4][$key5][$key6][] = $val;
 		}
 		return $dataApi;
 	}

@@ -69,7 +69,11 @@
 </head>
 <body>
 <div class="main-laporan page-break">
-	<?php foreach($laporan as $desa => $des): ?>
+	<?php foreach($laporan as $key => $kades): ?>
+		<?php $jabatan = $key; ?>
+	<?php foreach($kades as $key => $pemerintahan): ?>
+		<?php $nama_kades = $key; ?>
+	<?php foreach($pemerintahan as $desa => $des): ?>
 	<?php foreach($des as $kecamatan => $kec): ?>
 	<?php $subtotalArray = [0]; ?>
 	<h3>
@@ -209,8 +213,10 @@
 	</table>
 	<?php endforeach; ?>
 	<?php endforeach; ?>
+	<?php endforeach; ?>
+	<?php endforeach; ?>
 
-<?php echo "<p align='right'>Batang, ".date('d-m-Y')."<br>KEPALA DESA KEPUH<br><br><br>( Ahmad Mubarok )</p>"; ?>
+<?php echo "<p align='right'>Batang, ".date('d-m-Y')."<br>".$jabatan."<br><br><br>( ".$nama_kades." )</p>"; ?>
 </div>
 	
 </body>
